@@ -1,6 +1,6 @@
 # Cross-Domain Adaptive Clustering for Semi-Supervised Domain Adaptation
 
-This is an Pytorch implementation of "Cross-Domain Adaptive Clustering for Semi-Supervised Domain Adaptation" accepted by CVPR2021.
+This is a Pytorch implementation of "Cross-Domain Adaptive Clustering for Semi-Supervised Domain Adaptation" accepted by CVPR2021.
 More details of this work can be found in our paper: [[Paper (arxiv)]](https://arxiv.org/abs/2104.09415).
 
 The code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME) implementation.

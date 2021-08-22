@@ -10,8 +10,10 @@ The code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME)
 Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME)
 
 ## Training
-To run training using resnet34,
+To run training on DomainNet in the 3-shot scenario using resnet34,
+
 `CUDA_VISIBLE_DEVICES=gpu_id python main.py --dataset multi --source real --target sketch --net resnet34 --num 3 --lr_f 1.0 --multi 0.1`
+
 where, gpu_id = 0,1,2,3...
 
 ### Reference

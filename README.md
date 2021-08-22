@@ -6,7 +6,7 @@ More details of this work can be found in our paper: [[Arxiv]](https://arxiv.org
 Our code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME) implementation.
 
 Note:
-    The code will be gradually updated and completed.
+    The code will be gradually updated and completed as soon as possible.
 ## Install
 
 `pip install -r requirements.txt`

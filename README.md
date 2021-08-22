@@ -7,7 +7,7 @@ The code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME)
 
 ## Install and Data preparation
 
-Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME)
+Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME).
 
 ## Training
 To run training on DomainNet in the 3-shot scenario using resnet34,

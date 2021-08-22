@@ -5,7 +5,14 @@ More details of this work can be found in our paper: [[Paper (arxiv)]](https://a
 
 The code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME) implementation.
 
-## Install and Data preparation
+## Install
+
+`pip install -r requirements.txt`
+
+The code is written in Python 3.8.5, but should work for other version with some modifications.
+
+
+## Data preparation
 
 Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME).
 

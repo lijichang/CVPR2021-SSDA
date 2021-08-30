@@ -4,6 +4,7 @@ import torch.nn.functional as F
 import torch.nn as nn
 
 def get_losses_unlabeled(args, G, F1, im_data, im_data_bar, im_data_bar2, target, BCE, w_cons, device):
+    """ Get losses for unlabeled samples."""
     feat = G(im_data)
     output = F1(feat, reverse=True, eta=1.0)
     output_bar = F1(G(im_data_bar), reverse=True, eta=1.0)
@@ -32,29 +33,19 @@ def get_losses_unlabeled(args, G, F1, im_data, im_data_bar, im_data_bar2, target
     # loss for pseudo labeling
     pl_loss = (F.cross_entropy(output_bar2, pseudo_labels, reduction='none') * mask).mean()
 
-    # consistency loss
+    # loss for consistency
     con_loss = w_cons * F.mse_loss(prob_bar, prob_bar2) 
     return aac_loss, pl_loss, con_loss
 
 def advbce_unlabeled(args, target, feat, prob, prob_bar, device, bce):
     target_ulb = pairwise_target(args, feat, target, device)
-    # Adversarial version of Clustering Loss
     prob_bottleneck_row, _ = PairEnum(prob)
     _, prob_bottleneck_col = PairEnum(prob_bar)
     adv_bce_loss = -bce(prob_bottleneck_row, prob_bottleneck_col, target_ulb)
     return adv_bce_loss
 
-def bce_labeled(args, target, feat, prob, prob_bar, device, bce):
-    target_ulb = pairwise_target(args, feat, target, device)
-    # Clustering Loss
-    prob_bottleneck_row, _ = PairEnum(prob)
-    _, prob_bottleneck_col = PairEnum(prob_bar)
-    bce_loss = bce(prob_bottleneck_row, prob_bottleneck_col, target_ulb)
-    return bce_loss
-
-
 def pairwise_target(args, feat, target, device):
-    ## Similarity labels
+    """ Produce pairwise similarity label."""
     feat_detach = feat.detach()
     # For Unlabeled Data
     if target is None:
@@ -68,7 +59,6 @@ def pairwise_target(args, feat, target, device):
         rank_diff = torch.sum(torch.abs(rank_diff), dim=1)
         target_ulb = torch.ones_like(rank_diff).float().to(device)
         target_ulb[rank_diff > 0] = 0
-
     # For Labeled Data
     elif target is not None:
         target_row, target_col = PairEnum1D(target)
@@ -103,10 +93,8 @@ def sigmoid_rampup(current, rampup_length):
         return float(np.exp(-5.0 * phase * phase))
 
 class BCE(nn.Module):
-    eps = 1e-7  # Avoid calculating log(0). Use the small value of float16.
-
+    eps = 1e-7
     def forward(self, prob1, prob2, simi):
-        # simi: 1->similar; -1->dissimilar; 0->unknown(ignore)
         P = prob1.mul_(prob2)
         P = P.sum(1)
         P.mul_(simi).add_(simi.eq(-1).type_as(P))
@@ -114,11 +102,8 @@ class BCE(nn.Module):
         return neglogP.mean()
 
 class BCE_softlabels(nn.Module):
-    eps = 1e-7  # Avoid calculating log(0). Use the small value of float16.
-
+    eps = 1e-7
     def forward(self, prob1, prob2, simi):
-        # simi: 1->similar; -1->dissimilar; 0->unknown(ignore)
-
         P = prob1.mul_(prob2)
         P = P.sum(1)
         neglogP = - (simi * torch.log(P + BCE.eps) + (1. - simi) * torch.log(1. - P + BCE.eps))

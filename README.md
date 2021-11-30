@@ -19,10 +19,18 @@ The code is written in Python 3.8.5, but should work for other version with some
 Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME).
 
 ## Training
-To run training on DomainNet in the 3-shot scenario using resnet34,
+(1) To run training on DomainNet in the 3-shot scenario using resnet34,
 
-`python main.py --dataset multi --source real --target sketch --net resnet34 --num 3 --lr_f 1.0 --multi 0.1`
+`python main.py --dataset multi --source real --target sketch --net resnet34 --num 3 --lr_f 1.0 --multi 0.1 --save_check`
 
+(2) To run training on Office-Home in the 3-shot scenario using alexnet,
+
+`python main.py --dataset office_home --source Real --target  Art --net alexnet --num 3 --lr_f 1.0 --multi 0.1  --steps 20000 --save_check`
+
+
+(3) To run training on Office31 in the 3-shot scenario using alexnet,
+
+`python main.py --dataset office --source webcam --target amazon --net alexnet --num 3 --lr_f 1.0 --multi 0.1 --steps 10000 --save_check`
 
 ### Reference
 If you consider using this code or its derivatives, please consider citing:

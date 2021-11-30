@@ -248,7 +248,7 @@ def train(device, opt):
             acc_test, best_acc_test, acc_val, cur_time))
 
             with open(opt["logs_file"], 'a') as f:
-                f.write('step %d current %f best %f final %f time cost %f sec.\n\n' % (
+                f.write('step %d current %f best %f val %f time cost %f sec.\n\n' % (
                 step, acc_test, best_acc_test, acc_val, cur_time))
 
             G.train()

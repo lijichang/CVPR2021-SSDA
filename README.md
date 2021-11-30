@@ -5,8 +5,6 @@ More details of this work can be found in our paper: [[Arxiv]](https://arxiv.org
 
 Our code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME) implementation.
 
-Note:
-    The code will be gradually updated and completed as soon as possible.
 ## Install
 
 `pip install -r requirements.txt`
@@ -32,7 +30,8 @@ Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME).
 
 `python main.py --dataset office --source webcam --target amazon --net alexnet --num 3 --lr_f 1.0 --multi 0.1 --steps 5000 --save_check`
 
-### Reference
+
+### Citation
 If you consider using this code or its derivatives, please consider citing:
 
 ```
@@ -45,3 +44,5 @@ If you consider using this code or its derivatives, please consider citing:
     pages     = {2505-2514}
 }
 ```
+
+Please feel free to contact the first author, [Li Jichang](https://lijichang.github.io/), if you have any questions.

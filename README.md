@@ -30,7 +30,7 @@ Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME).
 
 (3) To run training on Office31 in the 3-shot scenario using alexnet,
 
-`python main.py --dataset office --source webcam --target amazon --net alexnet --num 3 --lr_f 1.0 --multi 0.1 --steps 10000 --save_check`
+`python main.py --dataset office --source webcam --target amazon --net alexnet --num 3 --lr_f 1.0 --multi 0.1 --steps 5000 --save_check`
 
 ### Reference
 If you consider using this code or its derivatives, please consider citing:

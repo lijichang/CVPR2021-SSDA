@@ -63,18 +63,15 @@ def folder_preparation(args):
 
     main_path = 'record/%s_%s_%s_net_%s_%s_to_%s_num_%s_%s' % (nowtime, args.dataset, args.method, args.net, args.source,
                               args.target, args.num, args.remark)
-    if not os.path.exists(main_path):
-        os.makedirs(main_path)
-
     # logs saving
-    # logs_file = os.path.join(main_path,
-                             # 'logs_%s_net_%s_%s_to_%s_num_%s' %
-                             # (args.method, args.net, args.source,
-                              # args.target, args.num))
     logs_file = os.path.join(main_path, 'logs')
                               
     # checkpath saving
     checkpath = os.path.join(main_path, 'checkpath')
+    
+    if not os.path.exists(main_path):
+        os.makedirs(main_path)
+        
     if not os.path.exists(checkpath):
         os.makedirs(checkpath)
 
@@ -108,53 +105,19 @@ for key, value in dict(G.named_parameters()).items():
 F1 = Predictor(num_class=len(class_list), inc=inc, temp=args.T)
 weights_init(F1)
 
-lr = args.lr
+
 
 G = nn.DataParallel(G)
 F1 = nn.DataParallel(F1)
 G = G.to(device)
 F1 = F1.to(device)
 
-im_data_s = torch.FloatTensor(1)
-im_data_bar_s = torch.FloatTensor(1)
-im_data_bar2_s = torch.FloatTensor(1)
-im_data_t = torch.FloatTensor(1)
-im_data_bar_t = torch.FloatTensor(1)
-im_data_bar2_t = torch.FloatTensor(1)
-im_data_tu = torch.FloatTensor(1)
-im_data_bar_tu = torch.FloatTensor(1)
-im_data_bar2_tu = torch.FloatTensor(1)
-gt_labels_s = torch.LongTensor(1)
-gt_labels_t = torch.LongTensor(1)
-
-im_data_s = im_data_s.to(device)
-im_data_bar_s = im_data_bar_s.to(device)
-im_data_bar2_s = im_data_bar2_s.to(device)
-im_data_t = im_data_t.to(device)
-im_data_bar_t = im_data_bar_t.to(device)
-im_data_bar2_t = im_data_bar2_t.to(device)
-im_data_tu = im_data_tu.to(device)
-im_data_bar_tu = im_data_bar_tu.to(device)
-im_data_bar2_tu = im_data_bar2_tu.to(device)
-gt_labels_s = gt_labels_s.to(device)
-gt_labels_t = gt_labels_t.to(device)
-
-im_data_s = Variable(im_data_s)
-im_data_bar_s = Variable(im_data_bar_s)
-im_data_bar2_s = Variable(im_data_bar2_s)
-im_data_t = Variable(im_data_t)
-im_data_bar_t = Variable(im_data_bar_t)
-im_data_bar2_t = Variable(im_data_bar2_t)
-im_data_tu = Variable(im_data_tu)
-im_data_bar_tu = Variable(im_data_bar_tu)
-im_data_bar2_tu = Variable(im_data_bar2_tu)
-gt_labels_s = Variable(gt_labels_s)
-gt_labels_t = Variable(gt_labels_t)
-
 opt = {}
 opt["logs_file"] = logs_file
 opt["checkpath"] = checkpath
 opt["class_list"] = class_list
+
+lr = args.lr
 
 source_loader = torch.utils.data.DataLoader(source_dataset, batch_size=bs, num_workers=3, shuffle=True, drop_last=True)
 target_loader = torch.utils.data.DataLoader(target_dataset, batch_size=min(bs, len(target_dataset)), num_workers=3,

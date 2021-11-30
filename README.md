@@ -14,7 +14,7 @@ The code is written in Python 3.8.5, but should work for other versions with som
 
 ## Data preparation
 
-Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME).
+Refer to [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME) and our paper.
 
 ## Training
 (1) To run training on DomainNet in the 3-shot scenario using alexnet,

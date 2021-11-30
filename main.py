@@ -25,7 +25,7 @@ parser.add_argument('--lr_f', type=float, default=1.0, metavar='LR_F', help='lea
 parser.add_argument('--multi', type=float, default=0.1, metavar='MLT',
                     help='learning rate multiplication(default: 0.1)')
 parser.add_argument('--T', type=float, default=0.05, metavar='T', help='temperature')
-parser.add_argument('--save_check', action='store_true', default=False, help='save checkpoint or not')
+parser.add_argument('--save_check', action='store_true', default=True, help='save checkpoint or not')
 parser.add_argument('--seed', type=int, default=1, metavar='S', help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=100, metavar='N',
                     help='how many batches to wait before logging training status')
@@ -42,6 +42,7 @@ parser.add_argument('--rampup_length', type=int, default=20000,
 parser.add_argument('--rampup_coef', type=float, default=30.0, help='coefficient of consistency loss')
 parser.add_argument('--topk', default=5, type=int, help='top-k indices of rank ordered feature elements')
 parser.add_argument('--threshold', default=0.95, type=float, help='threshold of pseudo labeling')
+parser.add_argument('--remark', type=str, default='', help='remark')
 args = parser.parse_args()
 
 torch.cuda.manual_seed(args.seed)
@@ -60,20 +61,20 @@ def folder_preparation(args):
     import datetime
     nowtime = datetime.datetime.now().strftime('%m%d%H%M%S')
 
-    main_path = 'record/%s_%s_%s_%s' % (nowtime, args.dataset, args.method, args.remark)
+    main_path = 'record/%s_%s_%s_net_%s_%s_to_%s_num_%s_%s' % (nowtime, args.dataset, args.method, args.net, args.source,
+                              args.target, args.num, args.remark)
     if not os.path.exists(main_path):
         os.makedirs(main_path)
 
     # logs saving
-    logs_file = os.path.join(main_path,
-                             'logs_%s_net_%s_%s_to_%s_num_%s' %
-                             (args.method, args.net, args.source,
-                              args.target, args.num))
+    # logs_file = os.path.join(main_path,
+                             # 'logs_%s_net_%s_%s_to_%s_num_%s' %
+                             # (args.method, args.net, args.source,
+                              # args.target, args.num))
+    logs_file = os.path.join(main_path, 'logs')
+                              
     # checkpath saving
-    checkpath = os.path.join(main_path, 'checkpath',
-                             '%s_net_%s_%s_to_%s_num_%s' %
-                             (args.method, args.net, args.source,
-                              args.target, args.num))
+    checkpath = os.path.join(main_path, 'checkpath')
     if not os.path.exists(checkpath):
         os.makedirs(checkpath)
 

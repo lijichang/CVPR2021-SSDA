@@ -38,7 +38,7 @@ def return_classlist(image_list):
 
 
 class Imagelists_VISDA(object):
-    def __init__(self, image_list, root="../SSDA_MME-master/data/multi/",
+    def __init__(self, image_list, root="./data/multi/",
                  transform=None, strong_transform=None, target_transform=None, test=False):
         imgs, labels = make_dataset_fromlist(image_list)
         self.imgs = imgs

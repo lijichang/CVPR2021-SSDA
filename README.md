@@ -9,7 +9,7 @@ Our code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME)
 
 `pip install -r requirements.txt`
 
-The code is written in Python 3.8.5, but should work for other version with some modifications.
+The code is written in Python 3.8.5, but should work for other versions with some modifications.
 
 
 ## Data preparation

@@ -46,7 +46,7 @@ def advbce_unlabeled(args, target, feat, prob, prob_bar, device, bce):
 def pairwise_target(args, feat, target, device):
     """ Produce pairwise similarity label."""
     feat_detach = feat.detach()
-    # For Unlabeled Data
+    # For unlabeled data
     if target is None:
         rank_feat = feat_detach
         rank_idx = torch.argsort(rank_feat, dim=1, descending=True)
@@ -58,7 +58,7 @@ def pairwise_target(args, feat, target, device):
         rank_diff = torch.sum(torch.abs(rank_diff), dim=1)
         target_ulb = torch.ones_like(rank_diff).float().to(device)
         target_ulb[rank_diff > 0] = 0
-    # For Labeled Data
+    # For labeled data
     elif target is not None:
         target_row, target_col = PairEnum1D(target)
         target_ulb = torch.zeros(target.size(0) * target.size(0)).float().to(device)

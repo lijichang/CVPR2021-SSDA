@@ -3,7 +3,7 @@
 This is a Pytorch implementation of "Cross-Domain Adaptive Clustering for Semi-Supervised Domain Adaptation" accepted by CVPR2021.
 More details of this work can be found in our paper: [[Arxiv]](https://arxiv.org/abs/2104.09415) or [[OpenAccess]](https://openaccess.thecvf.com/content/CVPR2021/html/Li_Cross-Domain_Adaptive_Clustering_for_Semi-Supervised_Domain_Adaptation_CVPR_2021_paper.html).
 
-Our implementation is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME) implementation.
+Our code is based on [SSDA_MME](https://github.com/VisionLearningGroup/SSDA_MME) implementation.
 
 ## Install
 
